@@ -16,28 +16,30 @@ interface SlotCardProps {
 const SlotCard = ({ summary: speaker, description, location }: SlotCardProps) => {
   const [title, theme, desc] = description?.split(' | ') ?? []
 
-  if (!title) return (
-    <Box py="1rem">
-      <Text as="h1">{speaker}</Text>
-    </Box>
-  )
-
   const getLocationColor = (location: string) => LOCATION_COLOR[location] ?? LOCATION_COLOR.default
 
   return (
     <Box py="1rem">
-      <Box display="flex" alignItems="center" mb=".5rem">
-        <Box mr=".5rem">
-          <Text as="h1">{title}</Text>
+      {!title ? (
+        <Box mb=".5rem">
+          <Text as="h1" color="grey"># {speaker}</Text>
         </Box>
-        <TalkTheme type={theme}>{theme}</TalkTheme>
-      </Box>
-      <Box mb=".5rem">
-        <Text color="grey" as="h2" sizing="sm">{speaker}</Text>
-      </Box>
-      <Box mb=".5rem">
-        <Text color="grey" sizing="sm">{cutBigString(desc, 50)}</Text>
-      </Box>
+      ) : (
+        <>
+          <Box display="flex" alignItems="center" mb=".5rem">
+            <Box mr=".5rem">
+              <Text as="h1">{title}</Text>
+            </Box>
+            <TalkTheme type={theme}>{theme}</TalkTheme>
+          </Box>
+          <Box mb=".5rem">
+            <Text color="grey" as="h2" sizing="sm">{speaker}</Text>
+          </Box>
+          <Box mb=".5rem">
+            <Text color="grey" sizing="sm">{cutBigString(desc, 50)}</Text>
+          </Box>
+        </>
+      )}
       {location?.length && (
         <Box display="flex" alignItems="center">
           <Text color={getLocationColor(location)}><MdLocationPin /></Text>
