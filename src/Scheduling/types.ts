@@ -5,6 +5,8 @@ export type CalendarDayType = {
   status: string,
   htmlLink: string,
   created: string,
+  description?: string,
+  location?: string,
   updated: string,
   summary: string,
   creator: {

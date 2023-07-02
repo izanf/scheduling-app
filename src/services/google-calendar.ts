@@ -1,8 +1,13 @@
+import { CALENDAR_ID, API_KEY } from 'config/constants'
+
+import { CalendarDayType } from 'Scheduling/types'
+
 const API_URL = 'https://www.googleapis.com/calendar/v3/calendars/'
-import { CALENDAR_ID, API_KEY } from "config/constants"
 
-export const getCalendar = async (): Promise<any> => {
-  const response = await fetch(`${API_URL + CALENDAR_ID}/events?key=${API_KEY}`).then(res => res.json())
+export const getCalendar = async (): Promise<{ items: CalendarDayType[] }> => {
+  const response = await fetch(`${API_URL + CALENDAR_ID}/events?key=${API_KEY}`)
 
-  return response
+  const data = response.json()
+
+  return data
 }

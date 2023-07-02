@@ -4,15 +4,21 @@ import { HourType } from './types'
 
 import { Box } from 'components'
 
-import DayHours from './DayHours'
+import SlotCard from './SlotCard/SlotCard'
 
 const Scheduling = () => {
-  const { calendar } = useScheduling()
+  const { isLoading: calendarLoading, calendar } = useScheduling()
+
+  if (calendarLoading) return <Box>Carregando...</Box>
 
   return (
     <Box>
       {calendar.map((dayHoursEvents: HourType) => (
-        <DayHours key={dayHoursEvents.dateTime} data={dayHoursEvents.items} />
+        <Box key={dayHoursEvents.dateTime}>
+          {dayHoursEvents.items.map(({ id, summary, description, location }) => (
+            <SlotCard key={id} {...{summary, description, location}} />
+          ))}
+        </Box>
       ))}
     </Box>
   )
