@@ -2,8 +2,10 @@ import useScheduling from './useScheduling'
 
 import { HourType } from './types'
 
-import { Box } from 'components'
+import { formatTime } from 'utils'
 
+import { Box } from 'components'
+import { SlotsHour, TimeTable, Time, Slots } from './Scheduling.styles'
 import SlotCard from './SlotCard/SlotCard'
 
 const Scheduling = () => {
@@ -12,15 +14,18 @@ const Scheduling = () => {
   if (calendarLoading) return <Box>Carregando...</Box>
 
   return (
-    <Box>
+    <TimeTable>
       {calendar.map((dayHoursEvents: HourType) => (
-        <Box key={dayHoursEvents.dateTime}>
-          {dayHoursEvents.items.map(({ id, summary, description, location }) => (
-            <SlotCard key={id} {...{summary, description, location}} />
-          ))}
-        </Box>
+        <SlotsHour key={dayHoursEvents.dateTime}>
+          <Time as="h2" sizing="sm" color="grey">{formatTime(dayHoursEvents.dateTime)}</Time>
+          <Slots>
+            {dayHoursEvents.items.map(({ id, summary, description, location }) => (
+              <SlotCard key={id} {...{ summary, description, location }} />
+            ))}
+          </Slots>
+        </SlotsHour>
       ))}
-    </Box>
+    </TimeTable>
   )
 }
 

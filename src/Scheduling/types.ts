@@ -6,7 +6,7 @@ export type CalendarDayType = {
   htmlLink: string,
   created: string,
   description?: string,
-  location?: string,
+  location: string,
   updated: string,
   summary: string,
   creator: {
@@ -27,7 +27,8 @@ export type CalendarDayType = {
   },
   iCalUID: string,
   sequence: number,
-  eventType: string
+  eventType: string,
+  order?: number
 }
 
 export type HourType = {

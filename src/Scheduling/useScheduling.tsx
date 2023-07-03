@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { getCalendar } from 'services/google-calendar'
 
-import { groupByDatetime } from './utils'
+import { groupByDatetime } from 'Scheduling/utils'
 
 import { HourType } from './types'
 

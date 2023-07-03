@@ -12,7 +12,7 @@ const sizing = {
 const colors = {
   black: '#000000',
   white: '#ffffff',
-  lightGrey: '#f1f3f4',
+  greyLight: '#f1f3f4',
   grey: '#5f6368',
   blue: '#4285f4',
   green: '#34a853',

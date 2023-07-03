@@ -4,9 +4,12 @@ import { ThemeProvider } from 'styled-components'
 
 import reportWebVitals from './reportWebVitals'
 
+import './assets/css/reset.css'
+
 import themes, { GlobalStyle } from 'themes'
 
 import Scheduling from './Scheduling/Scheduling'
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -1,32 +1,33 @@
 import { MdLocationPin } from 'react-icons/md'
 
-import { cutBigString } from '../utils'
+import { cutBigString } from 'Scheduling/utils'
 
 import { Box, Text } from 'components'
 
-import { TalkTheme } from './SlotCard.styles'
-import { LOCATION_COLOR } from 'config/constants'
+import { TalkTheme, SlotWrapper } from './SlotCard.styles'
+import { LOCATIONS_COLOR } from 'config/constants'
 
 interface SlotCardProps {
   summary: string,
   description?: string,
-  location?: string
+  location: string
 }
 
 const SlotCard = ({ summary: speaker, description, location }: SlotCardProps) => {
-  const [title, theme, desc] = description?.split(' | ') ?? []
+  const [title, theme, desc] = (description ?? '').split(' | ') ?? []
 
-  const getLocationColor = (location: string) => LOCATION_COLOR[location] ?? LOCATION_COLOR.default
+  const getLocationColor = (location: string) =>
+    LOCATIONS_COLOR[location] ?? LOCATIONS_COLOR.default
 
   return (
-    <Box py="1rem">
+    <SlotWrapper location={location} py="1rem">
       {!title ? (
         <Box mb=".5rem">
           <Text as="h1" color="grey"># {speaker}</Text>
         </Box>
       ) : (
         <>
-          <Box display="flex" alignItems="center" mb=".5rem">
+          <Box display="flex" alignItems="flex-start" mb=".5rem">
             <Box mr=".5rem">
               <Text as="h1">{title}</Text>
             </Box>
@@ -46,7 +47,7 @@ const SlotCard = ({ summary: speaker, description, location }: SlotCardProps) =>
           <Text color="grey" sizing="sm">{location}</Text>
         </Box>
       )}
-    </Box>
+    </SlotWrapper>
   )
 }
 
