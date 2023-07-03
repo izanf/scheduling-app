@@ -24,7 +24,15 @@ const colors = {
   redLight: '#f28b82'
 }
 
+const breakpoints = {
+  sm: 576,
+  md: 960,
+  lg: 1080,
+  xlg: 1440
+}
+
 export default {
   colors,
-  sizing
+  sizing,
+  breakpoints
 }
