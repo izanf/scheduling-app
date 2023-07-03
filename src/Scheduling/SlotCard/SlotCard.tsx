@@ -20,7 +20,7 @@ const SlotCard = ({ summary: speaker, description, location }: SlotCardProps) =>
     LOCATIONS_COLOR[location] ?? LOCATIONS_COLOR.default
 
   return (
-    <SlotWrapper location={location} py="1rem">
+    <SlotWrapper type={theme} location={location}>
       {!title ? (
         <Box mb=".5rem">
           <Text as="h1" color="grey"># {speaker}</Text>

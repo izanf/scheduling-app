@@ -36,6 +36,5 @@ export const Time = styled(Text)`
 export const Slots = styled(Box)`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1.5rem;
   grid-template-areas: "${Object.keys(LOCATIONS_COLOR).slice(0, -1).map(location => location.toLowerCase().split(' ').slice(-1)).join(' ')}";
 `
