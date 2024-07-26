@@ -1,18 +1,16 @@
-import { MdLocationPin } from 'react-icons/md';
-import { cutBigString } from 'Scheduling/utils';
-import { Box, Text } from 'components';
-import { TalkTheme, SlotWrapper } from './SlotCard.styles';
-import { LOCATIONS_COLOR } from 'config/constants';
-import { MdFavoriteBorder } from "react-icons/md";
-import { MdFavorite } from "react-icons/md";
+import { MdLocationPin, MdFavoriteBorder, MdFavorite } from 'react-icons/md'
+import { cutBigString } from 'Scheduling/utils'
+import { Box, Text } from 'components'
+import { TalkTheme, SlotWrapper } from './SlotCard.styles'
+import { LOCATIONS_COLOR } from 'config/constants'
 
 interface SlotCardProps {
-  id: string;
-  summary: string;
-  description?: string;
-  location: string;
-  favorites: string[];
-  setFavorites: React.Dispatch<React.SetStateAction<string[]>>; 
+  id: string
+  summary: string
+  description?: string
+  location: string
+  favorites: string[]
+  setFavorites: React.Dispatch<React.SetStateAction<string[]>> 
 }
 
 const SlotCard = ({ id, summary: speaker, description, location, favorites, setFavorites }: SlotCardProps) => {
@@ -22,21 +20,21 @@ const SlotCard = ({ id, summary: speaker, description, location, favorites, setF
     setFavorites((prevFav): any => {
 
       if (prevFav.includes(id)) {
-        return prevFav.filter(favId => favId !== id);
+        return prevFav.filter(favId => favId !== id)
       } else {
-        return [...prevFav, id];
+        return [...prevFav, id]
       }
-    });
-  };
+    })
+  }
 
   const isFavorite = (id: string): any => {
-    return favorites.includes(id) ? <MdFavorite style={{ color: 'red' }}/> : <MdFavoriteBorder />;
-  };
+    return favorites.includes(id) ? <MdFavorite style={{ color: 'red' }}/> : <MdFavoriteBorder />
+  }
 
-  const [title, theme, desc] = (description ?? '').split(' | ') ?? [];
+  const [title, theme, desc] = (description ?? '').split(' | ') ?? []
 
   const getLocationColor = (location: string) =>
-    LOCATIONS_COLOR[location] ?? LOCATIONS_COLOR.default;
+    LOCATIONS_COLOR[location] ?? LOCATIONS_COLOR.default
 
   return (
     <SlotWrapper display="flex" flexDirection="column" type={theme} location={location}>
@@ -72,7 +70,7 @@ const SlotCard = ({ id, summary: speaker, description, location, favorites, setF
         </Box>
       )}
     </SlotWrapper>
-  );
-};
+  )
+}
 
-export default SlotCard;
+export default SlotCard
