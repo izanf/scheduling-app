@@ -1,23 +1,42 @@
-import { MdLocationPin } from 'react-icons/md'
-
-import { cutBigString } from 'Scheduling/utils'
-
-import { Box, Text } from 'components'
-
-import { TalkTheme, SlotWrapper } from './SlotCard.styles'
-import { LOCATIONS_COLOR } from 'config/constants'
+import { MdLocationPin } from 'react-icons/md';
+import { cutBigString } from 'Scheduling/utils';
+import { Box, Text } from 'components';
+import { TalkTheme, SlotWrapper } from './SlotCard.styles';
+import { LOCATIONS_COLOR } from 'config/constants';
+import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavorite } from "react-icons/md";
 
 interface SlotCardProps {
-  summary: string,
-  description?: string,
-  location: string
+  id: string;
+  summary: string;
+  description?: string;
+  location: string;
+  favorites: string[];
+  setFavorites: React.Dispatch<React.SetStateAction<string[]>>; 
 }
 
-const SlotCard = ({ summary: speaker, description, location }: SlotCardProps) => {
-  const [title, theme, desc] = (description ?? '').split(' | ') ?? []
+const SlotCard = ({ id, summary: speaker, description, location, favorites, setFavorites }: SlotCardProps) => {
+
+
+  const toggleFavorite = (id: string) => {
+    setFavorites((prevFav): any => {
+
+      if (prevFav.includes(id)) {
+        return prevFav.filter(favId => favId !== id);
+      } else {
+        return [...prevFav, id];
+      }
+    });
+  };
+
+  const isFavorite = (id: string): any => {
+    return favorites.includes(id) ? <MdFavorite style={{ color: 'red' }}/> : <MdFavoriteBorder />;
+  };
+
+  const [title, theme, desc] = (description ?? '').split(' | ') ?? [];
 
   const getLocationColor = (location: string) =>
-    LOCATIONS_COLOR[location] ?? LOCATIONS_COLOR.default
+    LOCATIONS_COLOR[location] ?? LOCATIONS_COLOR.default;
 
   return (
     <SlotWrapper display="flex" flexDirection="column" type={theme} location={location}>
@@ -42,13 +61,18 @@ const SlotCard = ({ summary: speaker, description, location }: SlotCardProps) =>
         </>
       )}
       {location?.length && (
-        <Box display="flex" alignItems="center">
-          <Text color={getLocationColor(location)}><MdLocationPin /></Text>
-          <Text color="grey" sizing="sm">{location}</Text>
+        <Box display="flex" justifyContent="space-between" alignItems='center'>
+          <Box display="flex" alignItems="center">
+            <Text color={getLocationColor(location)}><MdLocationPin /></Text>
+            <Text color="grey" sizing="sm">{location}</Text>
+          </Box>
+          <Box onClick={() => toggleFavorite(id)} style={{ cursor: 'pointer' }}>
+            {isFavorite(id)}
+          </Box>
         </Box>
       )}
     </SlotWrapper>
-  )
-}
+  );
+};
 
-export default SlotCard
+export default SlotCard;
