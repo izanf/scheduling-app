@@ -7,7 +7,11 @@ export const TYPE_TALK_COLOR: { [key: string]: string } = {
   'Inteligência Artificial': 'yellow',
   'Ciência de Dados': 'yellow',
   Web: 'green',
+  Mobile: 'green',
   Segurança: 'red',
+  DevOps: 'red',
+  Carreira: 'blue',
+  Comunidade: 'blue',
   default: 'grey'
 }
 export const LOCATIONS_COLOR: { [key: string]:string } = {
